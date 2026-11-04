@@ -4,12 +4,12 @@
 # Outputs are kept in R: calibration, coefficients, simulated_data and trace.
 # Convergence plots are displayed in the current graphics device.
 
-# 1. Choose the targets -------------------------------------------------------
+# 1. Choose the targets 
 
 target_prevalence <- 0.8
 target_auc <- 0.85
 
-# 2. Optional settings --------------------------------------------------------
+# 2. Optional settings 
 
 # Predictors may be continuous, binary or a mixture. The defaults below use
 # two continuous predictors and one binary predictor. All slopes share a
@@ -28,7 +28,7 @@ calibration_seed <- 17L
 data_seed <- 2026L
 show_convergence_plots <- TRUE
 
-# 3. Check inputs and generate fixed covariates --------------------------------
+# 3. Check inputs and generate fixed covariates 
 
 if (!requireNamespace("pROC", quietly = TRUE)) {
   stop("Install pROC before running this script: install.packages('pROC')")
@@ -64,7 +64,7 @@ covariates <- data.frame(
 )
 X <- cbind(intercept = 1, as.matrix(covariates))
 
-# 4. Calibration helpers ------------------------------------------------------
+# 4. Calibration helpers 
 
 # AUC requires both outcome classes. Keep pROC's default direction selection.
 # Convert predictions to a vector to avoid the deprecated matrix-input warning.
@@ -97,7 +97,7 @@ find_intercept <- function(multiplier) {
   list(intercept = intercept, slopes = slopes, prevalence = prevalence)
 }
 
-# 5. Run Algorithm 3 ----------------------------------------------------------
+# 5. Run Algorithm 3
 
 # Each outer iteration proposes a multiplier and recalibrates the intercept.
 # AUC is averaged over several simulated outcome vectors. It is a noisy
@@ -136,7 +136,7 @@ for (iteration in seq_len(max_outer_iterations)) {
 }
 trace <- do.call(rbind, history[seq_len(iteration)])
 
-# 6. Retain the coefficients and calibration status ----------------------------
+# 6. Retain the coefficients and calibration status 
 
 # These are the final candidate values. Use them as calibrated coefficients
 # only when calibration$converged is TRUE.
@@ -178,7 +178,7 @@ if (converged) {
 cat("\nIntercept and slopes:\n")
 print(coefficients)
 
-# 7. Plot the calibration trace -----------------------------------------------
+# 7. Plot the calibration trace 
 
 # These plots describe the calibration search, not an MCMC fit.
 # Dashed lines mark prevalence/AUC targets and the final intercept value.
@@ -235,7 +235,7 @@ plot_convergence <- function(calibration) {
 # To display it again later, run plot_convergence(calibration).
 if (show_convergence_plots) plot_convergence(calibration)
 
-# 8. Generate a dataset after successful calibration --------------------------
+# 8. Generate a dataset after successful calibration 
 
 # The target prevalence concerns mean(probability). A new binary outcome draw
 # has sampling variation, so its observed prevalence and AUC need not equal
