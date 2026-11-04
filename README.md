@@ -192,5 +192,3 @@ saveRDS(
   file = "logistic_data_generation.rds"
 )
 ```
-
-
