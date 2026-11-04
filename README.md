@@ -10,6 +10,9 @@ comparison of three calibration algorithms.
 |---|---|
 | `generate_logistic_data.R` | Runs Algorithm 3 once, retains the calibrated coefficients and generates one dataset after successful calibration. |
 | `prevalence_auc_simulation.Rmd` | Compares Algorithms 1, 2 and 3 across four scenarios, with summaries and plots. |
+| `distribution_of_predicted_probabilities_all_algorithms.R` | Distribution of predicted probabilities for Algorithms 1, 2 and 3. |
+| `distribution_of_predicted_probabilities_under_perfect_separation.R`| Distribution of predicted probabilities when AUC is 1. |
+| `effect_of_priors_on_predicted_probabilities.R` | Effect of prior distribution on predicted probabilites. |
 
 The model uses an intercept and three slopes. Calibration multiplies the
 initial slopes by one common scaling factor, preserving their relative sizes.
@@ -24,7 +27,7 @@ install.packages(c("pROC", "knitr", "ggplot2", "dplyr", "tidyr"))
 
 The standalone R script requires only `pROC`; its convergence plots use base R.
 The R Markdown document uses all five packages. No external data files are
-required. Run the two workflows separately, preferably in fresh R sessions,
+required. Run the workflows separately, preferably in fresh R sessions,
 because both create objects in the working environment.
 
 ## 2. Generate one dataset with Algorithm 3
