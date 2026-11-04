@@ -193,13 +193,4 @@ saveRDS(
 )
 ```
 
-Choose a new filename when retaining another scenario. Use `sessionInfo()`
-to record the software versions associated with your results.
-
-## Validation
-
-The supplied files received static code checks. R was unavailable in the
-preparation environment, so numerical execution and plot rendering were not
-tested there. Run a small initial analysis in your R environment before the
-full simulation comparison.
 
